@@ -1,148 +1,207 @@
-import { useState } from "react";
+Title : 240502_1906
+Record date : 5/2/2024 7:06:01 PM
+Record time : 4:30:35
+Recording file name : 240502_1906
+------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LS.7 Ecosystems & Adaptations</title>
 
-export default function App() {
-  const [activeTab, setActiveTab] = useState("home");
-  const [quizAnswer, setQuizAnswer] = useState("");
-  const [feedback, setFeedback] = useState("");
-
-  const speak = (text) => {
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-US";
-    window.speechSynthesis.speak(speech);
-  };
-
-  const checkAnswer = () => {
-    if (quizAnswer.toLowerCase() === "abiotic") {
-      setFeedback("✅ Correct! Water is a nonliving factor.");
-    } else {
-      setFeedback("❌ Try again. Think: Is water living?");
-    }
-  };
-
-  const TabButton = ({ id, label }) => (
-    <button
-      onClick={() => setActiveTab(id)}
-      style={{
-        backgroundColor: activeTab === id ? "#5b4b8a" : "#8a79c9",
-        color: "white",
-        border: "none",
-        padding: "12px",
-        cursor: "pointer",
-        flex: 1,
-      }}
-    >
-      {label}
-    </button>
-  );
-
-  return (
-    <div style={{ fontFamily: "Arial", backgroundColor: "#f3f0ff", minHeight: "100vh" }}>
-      
-      <header style={{ backgroundColor: "#5b4b8a", color: "white", padding: "20px", textAlign: "center" }}>
-        <h1>🌎 LS.7 Ecosystems & Adaptations</h1>
-        <p>Interactive ESL Learning</p>
-      </header>
-
-      <nav style={{ display: "flex" }}>
-        <TabButton id="home" label="Home" />
-        <TabButton id="ecosystems" label="Ecosystems" />
-        <TabButton id="adaptations" label="Adaptations" />
-        <TabButton id="vocabulary" label="Vocabulary" />
-        <TabButton id="quiz" label="Quiz" />
-      </nav>
-
-      <div style={{ padding: "20px" }}>
-        
-        {activeTab === "home" && (
-          <div>
-            <h2>Essential Questions</h2>
-            <button onClick={() => speak("How do living and nonliving things work together?")}>
-              🔊 Read
-            </button>
-            <ul>
-              <li>How do living and nonliving things work together?</li>
-              <li>How do humans affect ecosystems?</li>
-              <li>How do organisms survive?</li>
-            </ul>
-          </div>
-        )}
-
-        {activeTab === "ecosystems" && (
-          <div>
-            <h2>Biotic vs. Abiotic</h2>
-
-            <h3>Biotic (Living) / Biótico (Vivo)</h3>
-            <ul>
-              <li>Plants / Plantas</li>
-              <li>Animals / Animales</li>
-              <li>Bacteria / Bacterias</li>
-            </ul>
-
-            <h3>Abiotic (Nonliving) / Abiótico (No vivo)</h3>
-            <ul>
-              <li>Water / Agua</li>
-              <li>Sunlight / Luz solar</li>
-              <li>Temperature / Temperatura</li>
-            </ul>
-
-            <button onClick={() => speak("Biotic means living. Abiotic means nonliving.")}>
-              🔊 Read Definition
-            </button>
-          </div>
-        )}
-
-        {activeTab === "adaptations" && (
-          <div>
-            <h2>Adaptations</h2>
-
-            <h3>Physical Adaptation / Adaptación Física</h3>
-            <p>Body part that helps survival (fur, claws, camouflage).</p>
-
-            <h3>Behavioral Adaptation / Adaptación Conductual</h3>
-            <p>Action that helps survival (migration, hibernation).</p>
-
-            <button onClick={() => speak("An adaptation helps an organism survive.")}>
-              🔊 Read
-            </button>
-          </div>
-        )}
-
-        {activeTab === "vocabulary" && (
-          <div>
-            <h2>Vocabulary with Support</h2>
-            <ul>
-              <li><b>Climate</b> – long-term weather / clima</li>
-              <li><b>Precipitation</b> – rain or snow / precipitación</li>
-              <li><b>Marine</b> – ocean ecosystem / marino</li>
-              <li><b>Freshwater</b> – low salt water / agua dulce</li>
-              <li><b>Desert</b> – dry land / desierto</li>
-              <li><b>Tundra</b> – very cold land / tundra</li>
-            </ul>
-          </div>
-        )}
-
-        {activeTab === "quiz" && (
-          <div>
-            <h2>Quick Check</h2>
-            <p>Water is a __________ factor.</p>
-
-            <input
-              type="text"
-              value={quizAnswer}
-              onChange={(e) => setQuizAnswer(e.target.value)}
-              placeholder="Type your answer"
-              style={{ padding: "8px", marginRight: "10px" }}
-            />
-
-            <button onClick={checkAnswer} style={{ padding: "8px", backgroundColor: "#5b4b8a", color: "white", border: "none" }}>
-              Check Answer
-            </button>
-
-            <p style={{ marginTop: "10px" }}>{feedback}</p>
-          </div>
-        )}
-
-      </div>
-    </div>
-  );
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f0ff;
 }
+
+header {
+  background-color: #5b4b8a;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  background-color: #8a79c9;
+}
+
+nav button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  background-color: #8a79c9;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #5b4b8a;
+}
+
+section {
+  display: none;
+  padding: 20px;
+}
+
+section.active {
+  display: block;
+}
+
+.box {
+  background-color: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+button.quiz-btn {
+  background-color: #5b4b8a;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
+</style>
+
+<script>
+function showTab(tabId) {
+  let sections = document.querySelectorAll("section");
+  sections.forEach(section => section.classList.remove("active"));
+  document.getElementById(tabId).classList.add("active");
+}
+
+function speak(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "en-US";
+  window.speechSynthesis.speak(speech);
+}
+
+function checkAnswer() {
+  let answer = document.getElementById("quizInput").value.toLowerCase();
+  let feedback = document.getElementById("feedback");
+
+  if (answer === "abiotic") {
+    feedback.innerHTML = "✅ Correct! Water is nonliving.";
+  } else {
+    feedback.innerHTML = "❌ Try again. Is water living?";
+  }
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>🌎 LS.7 Ecosystems & Adaptations</h1>
+<p>Interactive Learning for ESL Students</p>
+</header>
+
+<nav>
+<button onclick="showTab('home')">Home</button>
+<button onclick="showTab('ecosystems')">Ecosystems</button>
+<button onclick="showTab('adaptations')">Adaptations</button>
+<button onclick="showTab('compare')">Compare</button>
+<button onclick="showTab('vocabulary')">Vocabulary</button>
+<button onclick="showTab('quiz')">Quiz</button>
+</nav>
+
+<section id="home" class="active">
+<h2>Essential Questions</h2>
+<div class="box">
+• How do living and nonliving things work together?<br>
+• How do humans affect ecosystems?<br>
+• How do organisms survive?
+<button onclick="speak('How do living and nonliving things work together?')">🔊 Read</button>
+</div>
+</section>
+
+<section id="ecosystems">
+<h2>Biotic vs. Abiotic</h2>
+
+<div class="box">
+<b>Biotic (Living) / Biótico</b><br>
+Plants 🌱<br>
+Animals 🐾<br>
+Bacteria
+</div>
+
+<div class="box">
+<b>Abiotic (Nonliving) / Abiótico</b><br>
+Water 💧<br>
+Sunlight ☀️<br>
+Temperature 🌡️
+</div>
+
+<button onclick="speak('Biotic means living. Abiotic means nonliving.')">🔊 Read Definition</button>
+</section>
+
+<section id="adaptations">
+<h2>Adaptations</h2>
+
+<div class="box">
+<b>Physical Adaptation / Adaptación Física</b><br>
+Body part that helps survival (fur, camouflage).
+</div>
+
+<div class="box">
+<b>Behavioral Adaptation / Adaptación Conductual</b><br>
+Action that helps survival (migration, hibernation).
+</div>
+
+<div class="box">
+Sentence Frame:<br>
+The ______ helps the organism survive because ______.
+</div>
+</section>
+
+<section id="compare">
+<h2>Compare Ecosystems</h2>
+
+<div class="box">
+<b>Land:</b> soil, trees, temperature changes
+</div>
+
+<div class="box">
+<b>Freshwater:</b> low salt water, rivers, lakes
+</div>
+
+<div class="box">
+<b>Marine:</b> salt water, oceans, coral reefs
+</div>
+</section>
+
+<section id="vocabulary">
+<h2>Vocabulary</h2>
+
+<div class="box">
+Abiotic – nonliving / no vivo<br>
+Biotic – living / vivo<br>
+Climate – long-term weather / clima<br>
+Precipitation – rain or snow / precipitación<br>
+Marine – ocean ecosystem / marino<br>
+Freshwater – low salt water / agua dulce<br>
+Desert – dry land / desierto<br>
+Tundra – very cold land / tundra
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quick Check</h2>
+
+<div class="box">
+Water is a __________ factor.<br><br>
+
+<input type="text" id="quizInput">
+<button class="quiz-btn" onclick="checkAnswer()">Check</button>
+
+<p id="feedback"></p>
+</div>
+</section>
+
+</body>
+</html>
