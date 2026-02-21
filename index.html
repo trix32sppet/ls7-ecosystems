@@ -1,0 +1,148 @@
+import { useState } from "react";
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState("home");
+  const [quizAnswer, setQuizAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const speak = (text) => {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    window.speechSynthesis.speak(speech);
+  };
+
+  const checkAnswer = () => {
+    if (quizAnswer.toLowerCase() === "abiotic") {
+      setFeedback("✅ Correct! Water is a nonliving factor.");
+    } else {
+      setFeedback("❌ Try again. Think: Is water living?");
+    }
+  };
+
+  const TabButton = ({ id, label }) => (
+    <button
+      onClick={() => setActiveTab(id)}
+      style={{
+        backgroundColor: activeTab === id ? "#5b4b8a" : "#8a79c9",
+        color: "white",
+        border: "none",
+        padding: "12px",
+        cursor: "pointer",
+        flex: 1,
+      }}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div style={{ fontFamily: "Arial", backgroundColor: "#f3f0ff", minHeight: "100vh" }}>
+      
+      <header style={{ backgroundColor: "#5b4b8a", color: "white", padding: "20px", textAlign: "center" }}>
+        <h1>🌎 LS.7 Ecosystems & Adaptations</h1>
+        <p>Interactive ESL Learning</p>
+      </header>
+
+      <nav style={{ display: "flex" }}>
+        <TabButton id="home" label="Home" />
+        <TabButton id="ecosystems" label="Ecosystems" />
+        <TabButton id="adaptations" label="Adaptations" />
+        <TabButton id="vocabulary" label="Vocabulary" />
+        <TabButton id="quiz" label="Quiz" />
+      </nav>
+
+      <div style={{ padding: "20px" }}>
+        
+        {activeTab === "home" && (
+          <div>
+            <h2>Essential Questions</h2>
+            <button onClick={() => speak("How do living and nonliving things work together?")}>
+              🔊 Read
+            </button>
+            <ul>
+              <li>How do living and nonliving things work together?</li>
+              <li>How do humans affect ecosystems?</li>
+              <li>How do organisms survive?</li>
+            </ul>
+          </div>
+        )}
+
+        {activeTab === "ecosystems" && (
+          <div>
+            <h2>Biotic vs. Abiotic</h2>
+
+            <h3>Biotic (Living) / Biótico (Vivo)</h3>
+            <ul>
+              <li>Plants / Plantas</li>
+              <li>Animals / Animales</li>
+              <li>Bacteria / Bacterias</li>
+            </ul>
+
+            <h3>Abiotic (Nonliving) / Abiótico (No vivo)</h3>
+            <ul>
+              <li>Water / Agua</li>
+              <li>Sunlight / Luz solar</li>
+              <li>Temperature / Temperatura</li>
+            </ul>
+
+            <button onClick={() => speak("Biotic means living. Abiotic means nonliving.")}>
+              🔊 Read Definition
+            </button>
+          </div>
+        )}
+
+        {activeTab === "adaptations" && (
+          <div>
+            <h2>Adaptations</h2>
+
+            <h3>Physical Adaptation / Adaptación Física</h3>
+            <p>Body part that helps survival (fur, claws, camouflage).</p>
+
+            <h3>Behavioral Adaptation / Adaptación Conductual</h3>
+            <p>Action that helps survival (migration, hibernation).</p>
+
+            <button onClick={() => speak("An adaptation helps an organism survive.")}>
+              🔊 Read
+            </button>
+          </div>
+        )}
+
+        {activeTab === "vocabulary" && (
+          <div>
+            <h2>Vocabulary with Support</h2>
+            <ul>
+              <li><b>Climate</b> – long-term weather / clima</li>
+              <li><b>Precipitation</b> – rain or snow / precipitación</li>
+              <li><b>Marine</b> – ocean ecosystem / marino</li>
+              <li><b>Freshwater</b> – low salt water / agua dulce</li>
+              <li><b>Desert</b> – dry land / desierto</li>
+              <li><b>Tundra</b> – very cold land / tundra</li>
+            </ul>
+          </div>
+        )}
+
+        {activeTab === "quiz" && (
+          <div>
+            <h2>Quick Check</h2>
+            <p>Water is a __________ factor.</p>
+
+            <input
+              type="text"
+              value={quizAnswer}
+              onChange={(e) => setQuizAnswer(e.target.value)}
+              placeholder="Type your answer"
+              style={{ padding: "8px", marginRight: "10px" }}
+            />
+
+            <button onClick={checkAnswer} style={{ padding: "8px", backgroundColor: "#5b4b8a", color: "white", border: "none" }}>
+              Check Answer
+            </button>
+
+            <p style={{ marginTop: "10px" }}>{feedback}</p>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
