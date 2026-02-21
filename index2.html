@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosystems &amp; Adaptations</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .app-wrapper {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid transparent;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            line-height: 1.8;
+        }
+
+        .content-box h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-box h3 {
+            color: #764ba2;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .content-box p {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-box ul {
+            margin-left: 2rem;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .content-box li {
+            margin-bottom: 0.75rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-color: #764ba2;
+        }
+
+        .card h4 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: #ffd60a;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper">
+   <div class="header">
+    <h1 id="page-title">Ecosystems &amp; Adaptations</h1>
+   </div>
+   <div class="tabs-container">
+    <button class="tab-button active" data-tab="tab1" id="tab1-btn">What is an Ecosystem?</button> <button class="tab-button" data-tab="tab2" id="tab2-btn">Biotic &amp; Abiotic Factors</button> <button class="tab-button" data-tab="tab3" id="tab3-btn">Types of Ecosystems</button> <button class="tab-button" data-tab="tab4" id="tab4-btn">Adaptations</button>
+   </div>
+   <div class="content-area">
+    <!-- Tab 1: What is an Ecosystem? -->
+    <div class="tab-content active" id="tab1">
+     <div class="content-box">
+      <h2>¿Qué es un Ecosistema?</h2>
+      <p>Un <span class="highlight">ecosistema</span> es una comunidad de seres vivos y su entorno trabajando juntos. Incluye todos los animales, plantas y organismos diminutos que viven en un lugar, más todas las rocas, agua, tierra y aire a su alrededor.</p>
+      <h3>Ideas Clave</h3>
+      <ul>
+       <li>Los ecosistemas pueden ser grandes (como una selva tropical) o pequeños (como un charco)</li>
+       <li>Los ecosistemas pueden estar en tierra o en agua</li>
+       <li>Todo en un ecosistema está conectado</li>
+       <li>Cuando una parte de un ecosistema cambia, afecta a todo lo demás</li>
+      </ul>
+      <h3>Cómo Funcionan los Ecosistemas</h3>
+      <p>En un ecosistema saludable, todas las cosas vivas y no vivas trabajan juntas. Las plantas obtienen energía del sol, los animales comen plantas, y cuando las cosas mueren, devuelven nutrientes al suelo. Este ciclo continúa una y otra vez.</p>
+     </div>
+     <div class="content-box">
+      <h2>Preguntas Esenciales</h2>
+      <ul>
+       <li><strong>¿Cómo interactúan los factores bióticos y abióticos para hacer un ecosistema saludable?</strong></li>
+       <li><strong>¿Cómo impactan los humanos la salud de los factores bióticos y abióticos en un ecosistema?</strong></li>
+       <li><strong>¿Cómo se adaptan los organismos para sobrevivir en diferentes entornos?</strong></li>
+      </ul>
+     </div>
+    </div><!-- Tab 2: Biotic & Abiotic Factors -->
+    <div class="tab-content" id="tab2">
+     <div class="content-box">
+      <h2>Factores Bióticos y Abióticos</h2>
+      <p>Cada ecosistema tiene dos tipos principales de factores que afectan cómo viven los organismos:</p>
+     </div>
+     <div class="card-grid">
+      <div class="card">
+       <div class="icon">
+        🦁
+       </div>
+       <h4>Factores Bióticos</h4>
+       <p><strong>Seres vivos</strong> en un ecosistema</p>
+       <p><strong>Ejemplos:</strong> animales, plantas, insectos, bacterias, hongos y humanos</p>
+      </div>
+      <div class="card">
+       <div class="icon">
+        ☀️
+       </div>
+       <h4>Factores Abióticos</h4>
+       <p><strong>Cosas no vivas</strong> en un ecosistema</p>
+       <p><strong>Ejemplos:</strong> luz solar, agua, temperatura, tierra, aire y rocas</p>
+      </div>
+     </div>
+     <div class="content-box">
+      <h3>Cómo Trabajan Juntos</h3>
+      <p>Los factores bióticos y abióticos deben trabajar juntos para que un ecosistema sea saludable.</p>
+      <ul>
+       <li>Las plantas necesitan <strong>luz solar</strong> (abiótico) para crecer</li>
+       <li>Los animales necesitan <strong>agua</strong> (abiótico) para sobrevivir</li>
+       <li>Los descomponedores (biótico) descomponen cosas muertas para devolver nutrientes a la <strong>tierra</strong> (abiótico)</li>
+       <li>La <strong>temperatura</strong> (abiótico) afecta qué animales y plantas pueden vivir en un área</li>
+      </ul>
+     </div>
+     <div class="content-box">
+      <h3>Factores Climáticos Importantes</h3>
+      <ul>
+       <li><strong>Temperatura:</strong> Qué tan caliente o frío es el área</li>
+       <li><strong>Precipitación:</strong> Cuánta lluvia o nieve cae</li>
+       <li><strong>Latitud:</strong> Qué tan lejos al norte o sur está un lugar del ecuador</li>
+       <li><strong>Elevación:</strong> Qué tan alto sobre el nivel del mar está un lugar</li>
+      </ul>
+     </div>
+    </div><!-- Tab 3: Types of Ecosystems -->
+    <div class="tab-content" id="tab3">
+     <div class="content-box">
+      <h2>Ecosistemas Terrestres</h2>
+      <h3>🌳 Selva Tropical</h3>
+      <ul>
+       <li>Cálida y muy húmeda (mucha lluvia)</li>
+       <li>Vegetación espesa con árboles altos</li>
+       <li>Hogar de jaguares, loros, ranas y serpientes</li>
+      </ul>
+      <h3>🌲 Taiga (Bosque Boreal)</h3>
+      <ul>
+       <li>Frío con árboles de coníferas (pino y abeto)</li>
+       <li>Inviernos nevados, veranos cortos</li>
+       <li>Hogar de alces, osos y lobos</li>
+      </ul>
+      <h3>🌾 Pradera</h3>
+      <ul>
+       <li>Principalmente pasto con pocos árboles</li>
+       <li>Temperatura moderada y lluvia moderada</li>
+       <li>Hogar de bisontes, cebras y perros de la pradera</li>
+      </ul>
+      <h3>🏜️ Desierto</h3>
+      <ul>
+       <li>Muy caliente y muy seco (poca lluvia)</li>
+       <li>Pocas plantas, principalmente especies resistentes a la sequía</li>
+       <li>Hogar de camellos, serpientes y escorpiones</li>
+      </ul>
+      <h3>❄️ Tundra</h3>
+      <ul>
+       <li>Extremadamente frío y congelado la mayor parte del año</li>
+       <li>Sin árboles, solo plantas pequeñas y musgos</li>
+       <li>Hogar de osos polares, zorros árticos y bueyes de almizcaro</li>
+      </ul>
+     </div>
+     <div class="content-box">
+      <h2>Ecosistemas Acuáticos</h2>
+      <h3>🌊 Ecosistemas Marinos</h3>
+      <ul>
+       <li>Agua salada (océanos)</li>
+       <li>Los ecosistemas más grandes de la Tierra</li>
+       <li>Hogar de peces, ballenas, tiburones y coral</li>
+      </ul>
+      <h3>💧 Ecosistemas de Agua Dulce</h3>
+      <ul>
+       <li>Agua dulce (lagos, ríos, estanques)</li>
+       <li>Más pequeños pero muy importantes</li>
+       <li>Hogar de truchas, ranas, tortugas y castores</li>
+      </ul>
+     </div>
+    </div><!-- Tab 4: Adaptations -->
+    <div class="tab-content" id="tab4">
+     <div class="content-box">
+      <h2>¿Qué son las Adaptaciones?</h2>
+      <p>Una <span class="highlight">adaptación</span> es una parte especial del cuerpo o un comportamiento que ayuda a un organismo a sobrevivir en su entorno. Las adaptaciones se desarrollan durante muchas generaciones cuando los organismos con características útiles sobreviven y se reproducen.</p>
+     </div>
+     <div class="card-grid">
+      <div class="card">
+       <div class="icon">
+        💪
+       </div>
+       <h4>Adaptaciones Físicas</h4>
+       <p><strong>Partes del cuerpo</strong> que ayudan a los animales a sobrevivir</p>
+       <p><strong>Ejemplos:</strong> pelaje espeso para el frío, garras afiladas para cazar, picos largos para encontrar comida</p>
+      </div>
+      <div class="card">
+       <div class="icon">
+        🧠
+       </div>
+       <h4>Adaptaciones de Comportamiento</h4>
+       <p><strong>Acciones o hábitos</strong> que ayudan a los animales a sobrevivir</p>
+       <p><strong>Ejemplos:</strong> migración hacia el sur en invierno, hibernación, caza por la noche</p>
+      </div>
+     </div>
+     <div class="content-box">
+      <h3>Ejemplos de Adaptaciones</h3>
+      <h3>Animales del Desierto 🏜️</h3>
+      <ul>
+       <li><strong>Camello:</strong> Almacena agua en las jorobas, pelaje de color claro para reflejar el calor</li>
+       <li><strong>Serpiente de Cascabel:</strong> Caza por la noche cuando hace frío, se esconde durante los días calurosos</li>
+      </ul>
+      <h3>Animales del Ártico ❄️</h3>
+      <ul>
+       <li><strong>Oso Polar:</strong> Pelaje espeso y grasa para aislamiento, color blanco para camuflaje</li>
+       <li><strong>Zorro Ártico:</strong> Cambia el color del pelaje de marrón (verano) a blanco (invierno)</li>
+      </ul>
+      <h3>Animales del Océano 🌊</h3>
+      <ul>
+       <li><strong>Delfín:</strong> Cuerpo aerodinámico para nadar rápido, ecolocalización para encontrar comida</li>
+       <li><strong>Pez:</strong> Branquias para respirar bajo el agua, aletas para nadar</li>
+      </ul>
+      <h3>Animales del Bosque 🌳</h3>
+      <ul>
+       <li><strong>Búho:</strong> Ojos grandes para ver por la noche, alas silenciosas para sorprender a su presa</li>
+       <li><strong>Ardilla:</strong> Garras afiladas para trepar, cola tupida para el equilibrio</li>
+      </ul>
+     </div>
+     <div class="content-box">
+      <h2>¡Importante Recordar!</h2>
+      <ul>
+       <li>Las adaptaciones tardan miles de años en desarrollarse</li>
+       <li>Los animales no eligen adaptarse—solo los que tienen características útiles sobreviven</li>
+       <li>Diferentes ambientes requieren diferentes adaptaciones</li>
+       <li>Las adaptaciones ayudan a los organismos a obtener alimento, mantenerse seguros y reproducirse</li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        // Element SDK Configuration
+        const defaultConfig = {
+            page_title: "Ecosistemas y Adaptaciones",
+            tab1_label: "¿Qué es un Ecosistema?",
+            tab2_label: "Factores Bióticos y Abióticos",
+            tab3_label: "Tipos de Ecosistemas",
+            tab4_label: "Adaptaciones"
+        };
+
+        let config = { ...defaultConfig };
+
+        const elementHandler = {
+            defaultConfig,
+            onConfigChange: async (newConfig) => {
+                config = newConfig;
+               
+                // Update page title
+                const titleEl = document.getElementById('page-title');
+                if (titleEl) {
+                    titleEl.textContent = config.page_title || defaultConfig.page_title;
+                }
+
+                // Update tab labels
+                const tab1Btn = document.getElementById('tab1-btn');
+                const tab2Btn = document.getElementById('tab2-btn');
+                const tab3Btn = document.getElementById('tab3-btn');
+                const tab4Btn = document.getElementById('tab4-btn');
+
+                if (tab1Btn) tab1Btn.textContent = config.tab1_label || defaultConfig.tab1_label;
+                if (tab2Btn) tab2Btn.textContent = config.tab2_label || defaultConfig.tab2_label;
+                if (tab3Btn) tab3Btn.textContent = config.tab3_label || defaultConfig.tab3_label;
+                if (tab4Btn) tab4Btn.textContent = config.tab4_label || defaultConfig.tab4_label;
+            },
+            mapToCapabilities: () => ({
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            }),
+            mapToEditPanelValues: () => new Map([
+                ["page_title", config.page_title || defaultConfig.page_title],
+                ["tab1_label", config.tab1_label || defaultConfig.tab1_label],
+                ["tab2_label", config.tab2_label || defaultConfig.tab2_label],
+                ["tab3_label", config.tab3_label || defaultConfig.tab3_label],
+                ["tab4_label", config.tab4_label || defaultConfig.tab4_label]
+            ])
+        };
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init(elementHandler);
+        }
+
+        // Tab switching functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+               
+                // Remove active class from all buttons and content
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+               
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d179d39461ee5fe',t:'MTc3MTY5MTI3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
